@@ -120,7 +120,7 @@ install -m 755 -s linux-heretic-%{version}/xheretic \
 	$RPM_BUILD_ROOT/usr/X11R6/bin/xheretic
 install -m 755 -s linux-heretic-%{version}/sndserver \
 	$RPM_BUILD_ROOT/usr/libexec/heretic/sndserver
-cp -pf heretic-1.2/heretic1.wad $RPM_BUILD_ROOT/usr/share/heretic/heretic1.wad
+cp -pf heretic-1.2/heretic1.wad $RPM_BUILD_ROOT%{_datadir}/heretic/heretic1.wad
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -138,4 +138,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr (755, root, root) /usr/X11R6/bin/xheretic
 
 %attr (755, root, root, 755) /usr/libexec/heretic
-/usr/share/heretic
+%{_datadir}/heretic
