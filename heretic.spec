@@ -13,9 +13,8 @@ Source2:	%{name}.png
 # it seems to be non-distributable (see documentation)
 NoSource:	0
 Patch0:		%{name}-paths.patch
-Patch1:		%{name}-ppc.patch
+Patch1:		%{name}-nosysio.patch
 Patch2:		%{name}-duplicatecase.patch
-#Patch1:		%{name}-glcallback.patch
 URL:		http://heretic.linuxgames.com/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
