@@ -13,6 +13,7 @@ Source2:	%{name}.png
 NoSource:	0
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-glcallback.patch
+Patch2:		%{name}-ppc.patch
 BuildRequires:	XFree86-devel
 %ifarch %{ix86} alpha
 BuildRequires:	svgalib-devel
@@ -117,13 +118,14 @@ Linuksa.
 %setup -q -n gl%{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 OPT="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 %ifarch %{ix86}
 OPT="$OPT -D__32BIT__ -DHAVE_ALLOCA_H -DINLINE_FIXED"
 %endif
-%ifarch m68k
+%ifarch m68k ppc
 OPT="$OPT -D__BIG_ENDIAN__ -D__32BIT__ -DHAVE_ALLOCA_H"
 %endif
 %ifarch alpha
