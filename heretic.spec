@@ -13,7 +13,7 @@ NoSource:	0
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-glcallback.patch
 BuildRequires:	XFree86-devel
-%ifarch %{ix86}
+%ifarch %{ix86} alpha
 BuildRequires:	svgalib-devel
 %endif
 BuildRequires:	SDL-devel
@@ -136,7 +136,7 @@ OPT="$OPT -D__32BIT__ -fsigned-char -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ (
 OPT="$OPT -D__32BIT__ -D__BIG_ENDIAN__ -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ ((packed))\\\""
 %endif
 # Make the other versions
-%ifarch %{ix86}
+%ifarch %{ix86} alpha
 %{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl vga sndserver musserver
 %else
 %{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl sndserver musserver
@@ -149,7 +149,7 @@ rm -f $(grep -l GL_HERETIC $(find . -name \*.c) | sed 's/\.c/.o/g')
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}} \
 	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_applnkdir}/Games}
-%ifarch %{ix86}
+%ifarch %{ix86} alpha
 hvers="xa x sdl vga gl"
 %else
 hvers="xa x sdl gl"
@@ -173,7 +173,6 @@ install heretic_share.wad $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 install *.raw $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
 mv -f doc/End* doc/EndUserLicense-HereticSourceCode.txt
-gzip -9nf doc/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -188,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xa%{name}
 %{_applnkdir}/Games/xa%{name}.desktop
 
-%ifarch %{ix86}
+%ifarch %{ix86} alpha
 %files vga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/vga%{name}
@@ -206,6 +205,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc doc/*.gz
+%doc doc/*
 %{_datadir}/games/%{name}
 %attr(755,root,root) %{_libdir}/games/%{name}
