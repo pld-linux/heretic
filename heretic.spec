@@ -1,21 +1,23 @@
 Summary:	Heretic for the X Window System
+Summary(pl):	Heretic pod X Window System
 Name:		heretic
 Version:	1.0.1
 Release:	1
 URL:		http://www.cs.uni-potsdam.de/~wertmann/
 Source0:	http://www.cs.uni-potsdam.de/~wertmann/heretic/src/linux-%{name}-%{version}.tar.gz
 Source1:	http://www2.ravensoft.com/source/%{name}.zip
-Patch0:		heretic-0.9.5-alpha.patch.gz
-Patch1:		heretic-0.9.3-glibc21.patch.gz
-Patch2:		heretic-0.9.1.1-keymap.patch.gz
-Patch3:		heretic-0.9.5-datapaths.patch.gz
-Patch4:		heretic-0.9.1.1-noreturn.patch.gz
-Patch5:		heretic-0.9.5-soundpath.patch.gz
-Patch6:		heretic-0.9.5-nodebug.patch.gz
-Patch7:		heretic-0.9.5-make.patch.gz
+Patch0:		%{name}-0.9.5-alpha.patch.gz
+Patch1:		%{name}-0.9.3-glibc21.patch.gz
+Patch2:		%{name}-0.9.1.1-keymap.patch.gz
+Patch3:		%{name}-0.9.5-datapaths.patch.gz
+Patch4:		%{name}-0.9.1.1-noreturn.patch.gz
+Patch5:		%{name}-0.9.5-soundpath.patch.gz
+Patch6:		%{name}-0.9.5-nodebug.patch.gz
+Patch7:		%{name}-0.9.5-make.patch.gz
 Copyright:	distributable
-Group:		Games
-Group(pl):	Gry
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,7 +47,7 @@ chmod -R a+rX,g-w,o-w .
 find . -name "*~" -print0 | xargs -0 rm -f
 
 %build
-%{__make} -C linux-heretic-%{version} "COPT.arch=$RPM_OPT_FLAGS" \
+%{__make} -C linux-heretic-%{version} "COPT.arch=%{rpmcflags}" \
 	"CDEFS.net="'$(CDEFS.udp)' x11 sndserver
 cp -pf "linux-heretic-%{version}/doc/End User License Heretic Source Code.txt" \
 	linux-heretic-%{version}/doc/End-User-License-Heretic-Source-Code.txt
@@ -54,9 +56,9 @@ cp -pf "linux-heretic-%{version}/doc/End User License Heretic Source Code.txt" \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{libdir}/heretic,%{_datadir}/heretic}}
 
-install -s linux-heretic-%{version}/xheretic \
+install linux-heretic-%{version}/xheretic \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/bin/xheretic
-install -s linux-heretic-%{version}/sndserver \
+install linux-heretic-%{version}/sndserver \
 	$RPM_BUILD_ROOT%{_libdir}exec/heretic/sndserver
 
 cp -pf heretic-1.2/heretic1.wad $RPM_BUILD_ROOT%{_datadir}/heretic/heretic1.wad
