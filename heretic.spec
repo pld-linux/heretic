@@ -24,54 +24,6 @@ by the graphic masters at Raven Software in concert with the
 technical gurus of id Software, Heretic adds new levels of play
 and graphic wonder to the tried and true DOOM gaming environment.
 
-%changelog
-* Mon Feb 15 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- updated to heretic 0.9.5
-- removed the UDP networking patch as no longer necessary
-- updated the Alpha patch
-- removed the geometry patch as already applied
-- removed the namespace patch as already applied
-- updated the paths patches
-
-* Thu Feb 11 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- added an Alpha patch based on works by Robert Bowles
-
-* Sat Feb  6 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- removed unnecessary libm reference
-- fixed window's geometry handling
-
-* Thu Feb  4 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- updated to heretic 0.9.3
-- removed the P_NewChaseDir patch as no longer necessary
-- updated the UDP networking patch
-- updated the glibc 2.1 patch
-- updated the file paths patch to support HERETICHOME
-
-* Tue Feb  2 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- fixed the glibc 2.1 patch to be glibc 2.0 clean
-- fixed remaining known bugs in UDP networking
-
-* Mon Feb  1 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- updated to heretic 0.9.3alpha
-- added a patch for UDP networking
-
-* Fri Jan 29 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- added a fix to P_NewChaseDir to stop enemies being randomly
-  thrown out of the legal area of the game map
-- disabled some debugging facilities
-
-* Mon Jan 25 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- updated to heretic 0.9.2
-- removed the patch for P_FindNextHighestFloor as the problem is
-  fixed in this version
-
-* Sun Jan 24 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- added a fix for a nasty buffer overflow in P_FindNextHighestFloor
-  (whoever wrote the function must have been drunk or crazy...)
-
-* Fri Jan 22 1999 Maciej W. Rozycki <macro@ds2.pg.gda.pl>
-- initial build for heretic 0.9.1.1
-
 %prep
 %setup -c
 mkdir -p heretic-1.2
