@@ -7,7 +7,9 @@ Group:		Applications/Games
 License:	Activision/Raven, see Documentation
 URL:		http://heretic.linuxgames.com/
 Source0:	http://heretic.linuxgames.com/heretic/src/gl%{name}-%{version}.tar.gz
+# Source0-md5: b2db87a126cee747bb2882259e1acec1
 Source1:	http://heretic.linuxgames.com/wad/%{name}_share.tar.bz2
+# Source1-md5: d5f9264dcd42f5ef8ebedfd020e8f499
 Source2:	%{name}.png
 # it seems to be non-distributable (see documentation)
 NoSource:	0
