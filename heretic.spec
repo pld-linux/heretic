@@ -182,7 +182,7 @@ rm -f *.o graphics/*.o
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}} \
-	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_applnkdir}/Games/Arcade,%{_pixmapsdir}}
+	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_desktopdir},%{_pixmapsdir}}
 %ifarch %{ix86} alpha
 hvers="xa x sdl vga gl"
 %else
@@ -191,9 +191,10 @@ hvers="xa x sdl gl"
 
 for i in $hvers; do
 	install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
-	desktopfile="$RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/${i}%{name}.desktop"
+	desktopfile="$RPM_BUILD_ROOT%{_desktopdir}/${i}%{name}.desktop"
 	echo "[Desktop Entry]\nName=Heretic ($i)\nComment=Linux Heretic \
-	\nExec=%{_bindir}/${i}%{name}\nIcon=%{name}.png\nTerminal=0\nType=Application" > $desktopfile
+	\nExec=%{_bindir}/${i}%{name}\nIcon=%{name}.png\nTerminal=false \
+	\nType=Application\nCategories=Game;FirstPersonGame;" > $desktopfile
 done
 
 install -m 755 musserver sndserver $RPM_BUILD_ROOT%{_libdir}/games/%{name}
@@ -210,29 +211,29 @@ rm -rf $RPM_BUILD_ROOT
 %files x11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/x%{name}
-%{_applnkdir}/Games/Arcade/x%{name}.desktop
+%{_desktopdir}/x%{name}.desktop
 
 %files fastx11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xa%{name}
-%{_applnkdir}/Games/Arcade/xa%{name}.desktop
+%{_desktopdir}/xa%{name}.desktop
 
 %ifarch %{ix86} alpha
 %files vga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/vga%{name}
-%{_applnkdir}/Games/Arcade/vga%{name}.desktop
+%{_desktopdir}/vga%{name}.desktop
 %endif
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/sdl%{name}
-%{_applnkdir}/Games/Arcade/sdl%{name}.desktop
+%{_desktopdir}/sdl%{name}.desktop
 
 %files gl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gl%{name}
-%{_applnkdir}/Games/Arcade/gl%{name}.desktop
+%{_desktopdir}/gl%{name}.desktop
 
 %files common
 %defattr(644,root,root,755)
