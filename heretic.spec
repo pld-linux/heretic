@@ -4,21 +4,6 @@ Name:		heretic
 Version:	1.1
 Release:	1
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 License:	Activision/Raven, see Documentation
 URL:		http://heretic.linuxgames.com/
 Source0:	http://heretic.linuxgames.com/heretic/src/gl%{name}-%{version}.tar.gz
@@ -48,21 +33,6 @@ Heretic dla Linuksa.
 Summary:	Heretic for Linux - X11 version
 Summary(pl):	Heretic dla Linuksa - wersja pod X11
 Group:		X11/Applications/Games
-Group(cs):	X11/Aplikace/Hry
-Group(da):	X11/Programmer/Spil
-Group(de):	X11/Applikationen/Spiele
-Group(es):	X11/Aplicaciones/Juegos
-Group(fr):	X11/Applications/Jeux
-Group(is):	X11/Forrit/Leikir
-Group(it):	X11/Applicazioni/Giochi
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	X11/Applikasjoner/Spill
-Group(pl):	X11/Aplikacje/Gry
-Group(pt):	X11/AplicaГУes/Jogos
-Group(ru):	X11/Приложения/Игры
-Group(sl):	X11/Programi/Igre
-Group(sv):	X11/TillДmpningar/Spel
-Group(uk):	X11/Прикладн╕ Програми/╤гри
 Requires:	%{name}-common = %{version}
 
 %description x11
@@ -75,21 +45,6 @@ Heretic dla Linuksa (wersja pod X11).
 Summary:	Heretic for Linux - Accelerated X11 version
 Summary(pl):	Heretic dla Linuksa - przyspieszona wersja pod X11
 Group:		X11/Applications/Games
-Group(cs):	X11/Aplikace/Hry
-Group(da):	X11/Programmer/Spil
-Group(de):	X11/Applikationen/Spiele
-Group(es):	X11/Aplicaciones/Juegos
-Group(fr):	X11/Applications/Jeux
-Group(is):	X11/Forrit/Leikir
-Group(it):	X11/Applicazioni/Giochi
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	X11/Applikasjoner/Spill
-Group(pl):	X11/Aplikacje/Gry
-Group(pt):	X11/AplicaГУes/Jogos
-Group(ru):	X11/Приложения/Игры
-Group(sl):	X11/Programi/Igre
-Group(sv):	X11/TillДmpningar/Spel
-Group(uk):	X11/Прикладн╕ Програми/╤гри
 Requires:	%{name}-common = %{version}
 
 %description fastx11
@@ -102,21 +57,6 @@ Heretic dla Linuksa (przyspieszona wersja pod X11).
 Summary:	Heretic for Linux - SVGA version
 Summary(pl):	Heretic dla Linuksa - wersja SVGA
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 Requires:	%{name}-common = %{version}
 
 %description vga
@@ -129,21 +69,6 @@ Heretic dla Linuksa (wersja svgalib).
 Summary:	Heretic for Linux - SDL version
 Summary(pl):	Heretic dla Linuksa - wersja SDL
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 Requires:	%{name}-common = %{version}
 
 %description sdl
@@ -156,21 +81,6 @@ Heretic dla Linuksa (wersja SDL).
 Summary:	Heretic for Linux - OpenGL version
 Summary(pl):	Heretic dla Linuksa - wersja OpenGL
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 Requires:	%{name}-common = %{version}
 Requires:	OpenGL
 
@@ -184,21 +94,6 @@ Heretic dla Linuksa (wersja OpenGL).
 Summary:	Heretic for Linux - shared files
 Summary(pl):	Heretic dla Linuksa - wspСlne pliki
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 
 %description common
 Heretic is a supernatural blast-fest that is the most realistic,
