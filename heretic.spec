@@ -15,7 +15,7 @@ Patch6: heretic-0.9.5-nodebug.patch.gz
 Patch7: heretic-0.9.5-make.patch.gz
 Copyright: distributable
 Group: Games
-BuildRoot: /var/tmp/%{name}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Heretic is a supernatural blast-fest that is the most realistic,
