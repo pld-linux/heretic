@@ -1,0 +1,138 @@
+diff -Nur glheretic-1.1.orig/sndserv/wadread.c glheretic-1.1/sndserv/wadread.c
+--- glheretic-1.1.orig/sndserv/wadread.c	Thu Nov 25 11:24:49 1999
++++ glheretic-1.1/sndserv/wadread.c	Mon Jul  9 09:37:00 2001
+@@ -167,39 +167,14 @@
+ 	    else
+ 		free(fn);
+ 	}
+-    if ((envhome = getenv("PATH")))
+-        {
+-            char *path = strdup(envhome), *curentry;
+-            assert(path);                           
+-            while (strlen(path))
+-                {
+-                    if (!(curentry = strrchr(path, ':')))
+-                        curentry = path;
+-                    else
+-                        *curentry++ = 0;
+-                    fn = (char*)malloc(strlen(curentry)+19+strlen(wadname));   /* Add space for /, ../share/heretic/ */
+-                    assert(fn);                                 
+-                    sprintf(fn, "%s/%s", curentry, wadname);
+-                    if (!access(fn, R_OK))
+-                        {
+-                            free(path);
+-                            return fn;
+-                        }
+-                    /* check ../share/heretic */
+-                    sprintf(fn, "%s/../share/heretic/%s", curentry, wadname);
+-                    if (!access(fn, R_OK))
+-                        {
+-                            free(path);
+-                            return fn;
+-                        }
+-                    free(fn);
+-                    *curentry = 0;                          
+-                }
+-            free(path);
+-        }        
+-    if (!access(wadname, R_OK))
+-	    return wadname;
+-    
++    fn = (char*) malloc(strlen("/usr/share/games/heretic/")+strlen(wadname)+1);
++    assert(fn);
++    sprintf(fn, "/usr/share/games/heretic/%s", wadname);
++    if (!access(fn, R_OK))
++	return fn;
++    else
++	free(fn);
++
+     fn = (char*) malloc(strlen("./")+strlen(wadname)+1);
+     assert(fn);
+     sprintf(fn,"%s", wadname);
+diff -Nur glheretic-1.1.orig/soundclient/i_sound.c glheretic-1.1/soundclient/i_sound.c
+--- glheretic-1.1.orig/soundclient/i_sound.c	Sat Oct 23 11:02:21 1999
++++ glheretic-1.1/soundclient/i_sound.c	Mon Jul  9 09:31:19 2001
+@@ -578,36 +578,12 @@
+ 
+ void find_in_path(char **filename, int size)
+ {
+-    char *envhome = getenv("PATH"), *path, *curentry, *fn;
+-    
+-    if (strchr(*filename, '/') || !envhome)
+-        return;
+-        
+-    if (!(path = strdup(envhome)))
+-        return;
+-    
+-    while (strlen(path))
+-        {
+-            if (!(curentry = strrchr(path, ':')))
+-                curentry = path;
+-            else
+-                *curentry++ = 0;
+-            if (!(fn = (char*)malloc(strlen(curentry)+2+strlen(*filename))))
+-                {
+-                    free(path);
+-                    return;
+-                }
+-            sprintf(fn, "%s/%s", curentry, *filename);
+-            if (!access(fn, X_OK))
+-                {
+-                    strncpy(*filename, fn, size-1);
+-                    free(fn);
+-                    free(path);
+-                    return;
+-                }
+-            free(fn);                                
+-            *curentry = 0;
+-        }
+-   free(path);
++    char *fn;
++
++    if (!(fn = (char*)malloc(strlen("/usr/lib/games/heretic/")+strlen(*filename)+1)))
++	return;
++    sprintf(fn,"/usr/lib/games/heretic/%s", *filename);
++    strncpy(*filename,fn,size-1);
++    free(fn);
+ }      
+ 
+diff -Nur glheretic-1.1.orig/w_wad.c glheretic-1.1/w_wad.c
+--- glheretic-1.1.orig/w_wad.c	Mon May  1 12:24:52 2000
++++ glheretic-1.1/w_wad.c	Mon Jul  9 09:35:45 2001
+@@ -185,31 +185,11 @@
+ 	    free(fn);
+ 	}
+ 
+-    if ((fd < 0) && (envhome = getenv("PATH")))
+-        {
+-            char *path = strdup(envhome), *curentry;
+-            assert(path);
+-            while (strlen(path) && (fd < 0))
+-                {
+-                    if (!(curentry = strrchr(path, ':')))
+-                        curentry = path;
+-                    else
+-                        *curentry++ = 0;
+-                    fn = (char*) malloc(strlen(curentry)+19+strlen(fileName));  /* Add space for /, ../share/heretic/ */
+-                    assert(fn);
+-                    sprintf(fn, "%s/%s", curentry, fileName);
+-                    fd = open(fn, O_RDONLY | O_BINARY);      
+-                    /* check ../share/heretic */
+-                    if (fd < 0)                 
+-                        {      
+-                            sprintf(fn, "%s/../share/heretic/%s", curentry, fileName);
+-                            fd = open(fn, O_RDONLY | O_BINARY);
+-                        }
+-                    free(fn);
+-                    *curentry = 0;                          
+-                }
+-            free(path);
+-        }      
++    fn = (char*) malloc(strlen("/usr/share/games/heretic/")+strlen(fileName)+1);
++    assert(fn);
++    sprintf(fn, "/usr/share/games/heretic/%s", fileName);
++    fd = open(fn, O_RDONLY | O_BINARY);
++    free(fn);
+ 
+     if (fd < 0)
+         fd = open(fileName, O_RDONLY | O_BINARY);

@@ -1,83 +1,210 @@
-Summary:	Heretic for the X Window System
-Summary(pl):	Heretic pod X Window System
+Summary:	Heretic for Linux
 Name:		heretic
-Version:	1.0.1
+Version:	1.1
 Release:	1
-URL:		http://www.cs.uni-potsdam.de/~wertmann/
-Source0:	http://www.cs.uni-potsdam.de/~wertmann/heretic/src/linux-%{name}-%{version}.tar.gz
-Source1:	http://www2.ravensoft.com/source/%{name}.zip
-Patch0:		%{name}-0.9.5-alpha.patch.gz
-Patch1:		%{name}-0.9.3-glibc21.patch.gz
-Patch2:		%{name}-0.9.1.1-keymap.patch.gz
-Patch3:		%{name}-0.9.5-datapaths.patch.gz
-Patch4:		%{name}-0.9.1.1-noreturn.patch.gz
-Patch5:		%{name}-0.9.5-soundpath.patch.gz
-Patch6:		%{name}-0.9.5-nodebug.patch.gz
-Patch7:		%{name}-0.9.5-make.patch.gz
-Copyright:	distributable
 Group:		Applications/Games
 Group(de):	Applikationen/Spiele
 Group(pl):	Aplikacje/Gry
+License:	Activision/Raven, see Documentation
+URL:		http://heretic.linuxgames.com/
+Source0:	http://heretic.linuxgames.com/heretic/src/gl%{name}-%{version}.tar.gz
+Source1:	http://heretic.linuxgames.com/wad/%{name}_share.tar.bz2
+# it seems to be non-distributable (see documentation)
+NoSource:	0
+Patch0:		%{name}-paths.patch
+# Patch1:	glheretic-res.patch
+BuildRequires:	XFree86-devel
+%ifarch %{ix86}
+BuildRequires:	svgalib-devel
+%endif
+BuildRequires:	SDL-devel
+BuildRequires:	OpenGL-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_bindir		%{_prefix}/games
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
+
 %description
+
+%package x11
+Summary:	Heretic for Linux - X11 version
+Summary(pl):	Heretic dla Linuksa - wersja pod X11
+Group:		X11/Applications/Games
+Group(de):	X11/Applikationen/Spiele
+Group(pl):	X11/Aplikacje/Gry
+Requires:	%{name}-common = %{version}
+
+%description x11
+Heretic for Linux (X11 version).
+
+%description x11 -l pl
+Heretic dla Linuksa (wersja pod X11).
+
+%package fastx11
+Summary:	Heretic for Linux - Accelerated X11 version
+Summary(pl):	Heretic dla Linuksa - przyspieszona wersja pod X11
+Group:		X11/Applications/Games
+Group(de):	X11/Applikationen/Spiele
+Group(pl):	X11/Aplikacje/Gry
+Requires:	%{name}-common = %{version}
+
+%description fastx11
+Heretic for Linux (accelerated X11 version).
+
+%description fastx11 -l pl
+Heretic dla Linuksa (przyspieszona wersja pod X11).
+
+%package vga
+Summary:	Heretic for Linux - SVGA version
+Summary(pl):	Heretic dla Linuksa - wersja SVGA
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
+Requires:	%{name}-common = %{version}
+
+%description vga
+Heretic for Linux (svgalib version).
+
+%description vga -l pl
+Heretic dla Linuksa (wersja svgalib).
+
+%package sdl
+Summary:	Heretic for Linux - SDL version
+Summary(pl):	Heretic dla Linuksa - wersja SDL
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
+Requires:	%{name}-common = %{version}
+
+%description sdl
+Heretic for Linux (SDL version).
+
+%package gl
+Summary:	Heretic for Linux - OpenGL version
+Summary(pl):	Heretic dla Linuksa - wersja OpenGL
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
+Requires:	%{name}-common = %{version}
+Requires:	OpenGL
+
+%description gl
+Heretic for Linux (OpenGL version).
+
+%description gl -l pl
+Heretic dla Linuksa (wersja OpenGL).
+
+%package common
+Summary:	Heretic for Linux - shared files
+Summary(pl):	Heretic dla Linuksa - wspólne pliki
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
+
+%description common
 Heretic is a supernatural blast-fest that is the most realistic,
 action-packed fantasy combat computer game for the PC. Created by the
 graphic masters at Raven Software in concert with the technical gurus
 of id Software, Heretic adds new levels of play and graphic wonder to
 the tried and true DOOM gaming environment.
 
-%prep
-%setup -q -c
-mkdir -p heretic-1.2
-unzip -p %{SOURCE1} HTIC_V12.1 HTIC_V12.2 >heretic-1.2/htic_v12.zip
-(cd heretic-1.2 && unzip -Lao htic_v12.zip)
-chmod -R a+rX,g-w,o-w .
+This package contains Heretic common files.
 
-(cd linux-heretic-%{version}
-%patch0 -p1 -b .alpha~
-%patch1 -p1 -b .glibc21~
-%patch2 -p1 -b .keymap~
-%patch3 -p1 -b .datapaths~
-%patch4 -p1 -b .noreturn~
-%patch5 -p1 -b .soundpath~
-%patch6 -p1 -b .nodebug~
-%patch7 -p1 -b .make~
-)
-find . -name "*~" -print0 | xargs -0 rm -f
+%description common -l pl
+Wspólne pliki dla wszystkich wersji Heretica pod Linuksa.
+
+%prep
+%setup -q -n gl%{name}-%{version} -a1
+%patch0 -p1
 
 %build
-%{__make} -C linux-heretic-%{version} "COPT.arch=%{rpmcflags}" \
-	"CDEFS.net="'$(CDEFS.udp)' x11 sndserver
-cp -pf "linux-heretic-%{version}/doc/End User License Heretic Source Code.txt" \
-	linux-heretic-%{version}/doc/End-User-License-Heretic-Source-Code.txt
+OPT="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+%ifarch %ix86
+OPT="$OPT -D__32BIT__ -DHAVE_ALLOCA_H -DINLINE_FIXED"
+%endif
+%ifarch m68k
+OPT="$OPT -D__BIG_ENDIAN__ -D__32BIT__ -DHAVE_ALLOCA_H"
+%endif
+%ifarch alpha
+OPT="$OPT -D__64BIT__ -DHAVE_ALLOCA_H"
+%endif
+%ifarch arm
+OPT="$OPT -D__32BIT__ -fsigned-char -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ ((packed))\\\""
+%endif
+%ifarch sparc
+OPT="$OPT -D__32BIT__ -D__BIG_ENDIAN__ -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ ((packed))\\\""
+%endif
+# Make the other versions
+%ifarch %{ix86}
+%{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl vga sndserver musserver
+%else
+%{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl sndserver musserver
+%endif
+# Make OpenGL version
+rm -f $(grep -l GL_HERETIC $(find . -name \*.c) | sed 's/\.c/.o/g')
+%{__make} WANT_OGL=yes COPT.arch="$OPT -DGLU_VERSION_1_2" glheretic
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{libdir}/heretic,%{_datadir}/heretic}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}} \
+	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_applnkdir}/Games}
+%ifarch %{ix86}
+hvers="xa x sdl vga gl"
+%else
+hvers="xa x sdl gl"
+%endif
+for i in $hvers ; do
+  install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
+  echo >$RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop <<EOF
+[Desktop Entry]
+Name=Heretic
+Comment=Linux Heretic
+TryExec=%{_bindir}/${i}%{name}
+Exec=%{_bindir}/${i}%{name}
+Terminal=0
+Type=Application
+EOF
+# Menu entry for Mandrake/KDE
+done
+install -m 755 musserver sndserver $RPM_BUILD_ROOT%{_libdir}/games/%{name}
+install heretic_share.wad $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+# Currently, this is only needed for the OpenGL version
+install *.raw $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-install linux-heretic-%{version}/xheretic \
-	$RPM_BUILD_ROOT%{_prefix}/X11R6/bin/xheretic
-install linux-heretic-%{version}/sndserver \
-	$RPM_BUILD_ROOT%{_libdir}exec/heretic/sndserver
-
-cp -pf heretic-1.2/heretic1.wad $RPM_BUILD_ROOT%{_datadir}/heretic/heretic1.wad
+mv -f doc/End* doc/EndUserLicense-HereticSourceCode.txt
+gzip -9nf doc/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files x11
 %defattr(644,root,root,755)
-%attr (644,root,root,755)
-%doc heretic-1.2/file_id.diz heretic-1.2/helpme.txt heretic-1.2/license.doc
-%doc heretic-1.2/readme.txt
-%doc linux-heretic-%{version}/doc/AUTHORS
-%doc linux-heretic-%{version}/doc/Changelog
-%doc linux-heretic-%{version}/doc/End-User-License-Heretic-Source-Code.txt
-%doc linux-heretic-%{version}/doc/README.txt
-%doc linux-heretic-%{version}/doc/SourceReadme.txt
+%attr(755,root,root) %{_bindir}/x%{name}
+%{_applnkdir}/Games/x%{name}.desktop
 
-%attr (755,root,root) %{_bindir}/xheretic
+%files fastx11
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xa%{name}
+%{_applnkdir}/Games/xa%{name}.desktop
 
-%attr (755,root,root,755) %{_libdir}/heretic
-%{_datadir}/heretic
+%ifarch %{ix86}
+%files vga
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/vga%{name}
+%endif
+
+%files sdl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/sdl%{name}
+%{_applnkdir}/Games/sdl%{name}.desktop
+
+%files gl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gl%{name}
+%{_applnkdir}/Games/gl%{name}.desktop
+
+%files common
+%defattr(644,root,root,755)
+%doc doc/*.gz
+%{_datadir}/games/%{name}
+%attr(755,root,root) %{_libdir}/games/%{name}
