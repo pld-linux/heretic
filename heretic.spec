@@ -45,7 +45,7 @@ chmod -R a+rX,g-w,o-w .
 find . -name "*~" -print0 | xargs -0 rm -f
 
 %build
-make -C linux-heretic-%{version} "COPT.arch=$RPM_OPT_FLAGS" \
+%{__make} -C linux-heretic-%{version} "COPT.arch=$RPM_OPT_FLAGS" \
 	"CDEFS.net="'$(CDEFS.udp)' x11 sndserver
 cp -pf "linux-heretic-%{version}/doc/End User License Heretic Source Code.txt" \
 	linux-heretic-%{version}/doc/End-User-License-Heretic-Source-Code.txt
