@@ -126,7 +126,7 @@ cp -pf heretic-1.2/heretic1.wad $RPM_BUILD_ROOT%{_datadir}/heretic/heretic1.wad
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%attr (644, root, root, 755)
+%attr (644,root,root,755)
 %doc heretic-1.2/file_id.diz heretic-1.2/helpme.txt heretic-1.2/license.doc
 %doc heretic-1.2/readme.txt
 %doc linux-heretic-%{version}/doc/AUTHORS
@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc linux-heretic-%{version}/doc/README.txt
 %doc linux-heretic-%{version}/doc/SourceReadme.txt
 
-%attr (755, root, root) /usr/X11R6/bin/xheretic
+%attr (755,root,root) /usr/X11R6/bin/xheretic
 
-%attr (755, root, root, 755) /usr/libexec/heretic
+%attr (755,root,root,755) /usr/libexec/heretic
 %{_datadir}/heretic
