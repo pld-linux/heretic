@@ -1,0 +1,16 @@
+--- glheretic-1.2/graphics/i_x11_fast.c.orig	2003-12-08 23:48:58.000000000 +0100
++++ glheretic-1.2/graphics/i_x11_fast.c	2003-12-14 03:27:18.982561464 +0100
+@@ -151,13 +151,9 @@
+       case XK_Page_Down:rc = KEY_PAGEDOWN;      break; 
+       case XK_Home:     rc = KEY_HOME;          break; 
+       case XK_End:      rc = KEY_END;           break;
+-      case XK_KP_Left:
+       case XK_Left:	rc = KEY_LEFTARROW;	break;
+-      case XK_KP_Right:
+       case XK_Right:	rc = KEY_RIGHTARROW;	break;
+-      case XK_KP_Down:
+       case XK_Down:	rc = KEY_DOWNARROW;	break;
+-      case XK_KP_Up:
+       case XK_Up:	rc = KEY_UPARROW;	break;
+       case XK_Escape:	rc = KEY_ESCAPE;	break;
+       case XK_Return:	rc = KEY_ENTER;		break;
