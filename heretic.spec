@@ -2,7 +2,7 @@ Summary:	Heretic for Linux
 Summary(pl):	Heretic dla Linuksa
 Name:		heretic
 Version:	1.1
-Release:	1
+Release:	2
 Group:		Applications/Games
 License:	Activision/Raven, see Documentation
 URL:		http://heretic.linuxgames.com/
@@ -154,19 +154,14 @@ hvers="xa x sdl vga gl"
 %else
 hvers="xa x sdl gl"
 %endif
+
 for i in $hvers; do
 	install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
-	echo > $RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop <<EOF
-[Desktop Entry]
-Name=Heretic
-Comment=Linux Heretic
-TryExec=%{_bindir}/${i}%{name}
-Exec=%{_bindir}/${i}%{name}
-Terminal=0
-Type=Application
-EOF
-# Menu entry for Mandrake/KDE
+	desktopfile="$RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop"
+	echo "[Desktop Entry]\nName=Heretic ($i)\nComment=Linux Heretic \
+	\nExec=%{_bindir}/${i}%{name}\nIcon=xapp\nTerminal=0\nType=Application" > $desktopfile
 done
+
 install -m 755 musserver sndserver $RPM_BUILD_ROOT%{_libdir}/games/%{name}
 install heretic_share.wad $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 # Currently, this is only needed for the OpenGL version
