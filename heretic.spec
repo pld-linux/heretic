@@ -2,12 +2,13 @@ Summary:	Heretic for Linux
 Summary(pl):	Heretic dla Linuksa
 Name:		heretic
 Version:	1.1
-Release:	2
+Release:	3
 Group:		Applications/Games
 License:	Activision/Raven, see Documentation
 URL:		http://heretic.linuxgames.com/
 Source0:	http://heretic.linuxgames.com/heretic/src/gl%{name}-%{version}.tar.gz
 Source1:	http://heretic.linuxgames.com/wad/%{name}_share.tar.bz2
+Source2:	%{name}.png
 # it seems to be non-distributable (see documentation)
 NoSource:	0
 Patch0:		%{name}-paths.patch
@@ -148,7 +149,7 @@ rm -f $(grep -l GL_HERETIC $(find . -name \*.c) | sed 's/\.c/.o/g')
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}} \
-	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_applnkdir}/Games}
+	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_applnkdir}/Games,%{_pixmapsdir}}
 %ifarch %{ix86} alpha
 hvers="xa x sdl vga gl"
 %else
@@ -159,13 +160,14 @@ for i in $hvers; do
 	install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
 	desktopfile="$RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop"
 	echo "[Desktop Entry]\nName=Heretic ($i)\nComment=Linux Heretic \
-	\nExec=%{_bindir}/${i}%{name}\nIcon=xapp\nTerminal=0\nType=Application" > $desktopfile
+	\nExec=%{_bindir}/${i}%{name}\nIcon=%{name}.png\nTerminal=0\nType=Application" > $desktopfile
 done
 
 install -m 755 musserver sndserver $RPM_BUILD_ROOT%{_libdir}/games/%{name}
 install heretic_share.wad $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 # Currently, this is only needed for the OpenGL version
 install *.raw $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 mv -f doc/End* doc/EndUserLicense-HereticSourceCode.txt
 
@@ -203,3 +205,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/*
 %{_datadir}/games/%{name}
 %attr(755,root,root) %{_libdir}/games/%{name}
+%{_pixmapsdir}/*
