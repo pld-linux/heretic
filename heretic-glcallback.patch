@@ -1,0 +1,12 @@
+--- glheretic-1.1/opengl/gl_floorceil.c.orig	Mon May  1 21:17:09 2000
++++ glheretic-1.1/opengl/gl_floorceil.c	Mon Feb 18 19:14:07 2002
+@@ -25,6 +25,9 @@
+ #define F_SKY	"F_SKY1"
+ #endif
+ 
++/* non-Windows compilation: */
++#define GLCALLBACK
++
+ extern lumpinfo_t	*lumpinfo;		// location of each lump on disk
+ extern GLTexture *p_stGLTextures;
+ extern GLTexArray *p_stGLTexArray;

@@ -26,7 +26,7 @@ Source1:	http://heretic.linuxgames.com/wad/%{name}_share.tar.bz2
 # it seems to be non-distributable (see documentation)
 NoSource:	0
 Patch0:		%{name}-paths.patch
-# Patch1:	glheretic-res.patch
+Patch1:		%{name}-glcallback.patch
 BuildRequires:	XFree86-devel
 %ifarch %{ix86}
 BuildRequires:	svgalib-devel
@@ -149,6 +149,9 @@ Requires:	%{name}-common = %{version}
 %description sdl
 Heretic for Linux (SDL version).
 
+%description sdl -l pl
+Heretic dla Linuksa (wersja SDL).
+
 %package gl
 Summary:	Heretic for Linux - OpenGL version
 Summary(pl):	Heretic dla Linuksa - wersja OpenGL
@@ -207,15 +210,22 @@ the tried and true DOOM gaming environment.
 This package contains Heretic common files.
 
 %description common -l pl
-Wspólne pliki dla wszystkich wersji Heretica pod Linuksa.
+Heretic jest realistyczn± gr± walki w ¶wiecie fantasy. Stworzona
+zosta³a przez grafików Raven Software w porozumieniu z technikami
+Id Software. Heretic daje nowe poziomy gry oraz now± grafikê do
+wypróbowanego ¶rodowiska DOOMa.
+
+Ten pakiet zawiera wspólne pliki dla wszystkich wersji Heretica pod
+Linuksa.
 
 %prep
 %setup -q -n gl%{name}-%{version} -a1
 %patch0 -p1
+%patch1 -p1
 
 %build
 OPT="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
-%ifarch %ix86
+%ifarch %{ix86}
 OPT="$OPT -D__32BIT__ -DHAVE_ALLOCA_H -DINLINE_FIXED"
 %endif
 %ifarch m68k
