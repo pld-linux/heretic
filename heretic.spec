@@ -1,6 +1,6 @@
 Summary: Heretic for the X Window System
 Name: heretic
-Version: 0.9.5
+Version: 1.0.1
 Release: 1
 URL: http://www.cs.uni-potsdam.de/~wertmann/
 Source0: http://www.cs.uni-potsdam.de/~wertmann/heretic/src/linux-heretic-%{version}.tar.gz
