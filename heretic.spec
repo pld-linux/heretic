@@ -106,8 +106,8 @@ This package contains Heretic common files.
 
 %description common -l pl
 Heretic jest realistyczn± gr± walki w ¶wiecie fantasy. Stworzona
-zosta³a przez grafików Raven Software w porozumieniu z technikami
-Id Software. Heretic daje nowe poziomy gry oraz now± grafikê do
+zosta³a przez grafików Raven Software w porozumieniu z technikami Id
+Software. Heretic daje nowe poziomy gry oraz now± grafikê do
 wypróbowanego ¶rodowiska DOOMa.
 
 Ten pakiet zawiera wspólne pliki dla wszystkich wersji Heretica pod
