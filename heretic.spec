@@ -259,9 +259,9 @@ hvers="xa x sdl vga gl"
 %else
 hvers="xa x sdl gl"
 %endif
-for i in $hvers ; do
-  install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
-  echo >$RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop <<EOF
+for i in $hvers; do
+	install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
+	echo > $RPM_BUILD_ROOT%{_applnkdir}/Games/${i}%{name}.desktop <<EOF
 [Desktop Entry]
 Name=Heretic
 Comment=Linux Heretic
