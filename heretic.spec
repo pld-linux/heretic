@@ -187,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %files vga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/vga%{name}
-%{_applnkdir}/Games/Arcade/vg%{name}.desktop
+%{_applnkdir}/Games/Arcade/vga%{name}.desktop
 %endif
 
 %files sdl
