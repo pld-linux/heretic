@@ -1,30 +1,29 @@
 Summary:	Heretic for Linux
 Summary(pl):	Heretic dla Linuksa
 Name:		heretic
-Version:	1.1
-Release:	3
+Version:	1.2
+Release:	1
 Group:		Applications/Games
 License:	Activision/Raven, see Documentation
-URL:		http://heretic.linuxgames.com/
 Source0:	http://heretic.linuxgames.com/heretic/src/gl%{name}-%{version}.tar.gz
-# Source0-md5: b2db87a126cee747bb2882259e1acec1
+# NoSource0-md5: fafb739195bfbf2dd035070ec0792d4e
 Source1:	http://heretic.linuxgames.com/wad/%{name}_share.tar.bz2
-# Source1-md5: d5f9264dcd42f5ef8ebedfd020e8f499
+# Source1-md5:	d5f9264dcd42f5ef8ebedfd020e8f499
 Source2:	%{name}.png
 # it seems to be non-distributable (see documentation)
 NoSource:	0
 Patch0:		%{name}-paths.patch
-Patch1:		%{name}-glcallback.patch
-Patch2:		%{name}-ppc.patch
+Patch1:		%{name}-ppc.patch
+Patch2:		%{name}-duplicatecase.patch
+#Patch1:		%{name}-glcallback.patch
+URL:		http://heretic.linuxgames.com/
+BuildRequires:	OpenGL-devel
+BuildRequires:	SDL-devel
 BuildRequires:	XFree86-devel
 %ifarch %{ix86} alpha
 BuildRequires:	svgalib-devel
 %endif
-BuildRequires:	SDL-devel
-BuildRequires:	OpenGL-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 Heretic for Linux.
@@ -85,6 +84,7 @@ Summary:	Heretic for Linux - OpenGL version
 Summary(pl):	Heretic dla Linuksa - wersja OpenGL
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
+# dlopens libGL.so
 Requires:	OpenGL
 
 %description gl
@@ -116,38 +116,68 @@ wypróbowanego ¶rodowiska DOOMa.
 Ten pakiet zawiera wspólne pliki dla wszystkich wersji Heretica pod
 Linuksa.
 
+%package data-shareware
+Summary:	Heretic for Linux - shareware version of data (WAD file)
+Summary(pl):	Heretic dla Linuksa - wersja shareware danych (pliku WAD)
+Group:		Applications/Games
+Requires:	%{name}-common = %{version}
+
+%description data-shareware
+Heretic for Linux - shareware version of data (WAD file).
+
+%description data-shareware -l pl
+Heretic dla Linuksa - wersja shareware danych (pliku WAD).
+
 %prep
 %setup -q -n gl%{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
+rm -f .depend
+
 %build
-OPT="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+OPT="%{rpmcflags} %{!?debug:-fomit-frame-pointer} -DHAVE_ALLOCA_H"
+%ifarch alpha ia64 ppc64 sparc64 x86_64
+OPT="$OPT -D__64BIT__"
+%else
+OPT="$OPT -D__32BIT__"
+%endif
+%ifarch m68k ppc ppc64 sparc sparc64 sparcv9
+OPT="$OPT -D__BIG_ENDIAN__"
+%endif
 %ifarch %{ix86}
-OPT="$OPT -D__32BIT__ -DHAVE_ALLOCA_H -DINLINE_FIXED"
+OPT="$OPT %{!?debug:-DINLINE_FIXED}"
 %endif
-%ifarch m68k ppc
-OPT="$OPT -D__BIG_ENDIAN__ -D__32BIT__ -DHAVE_ALLOCA_H"
-%endif
-%ifarch alpha
-OPT="$OPT -D__64BIT__ -DHAVE_ALLOCA_H"
+%ifarch arm sparc sparc64 sparcv9
+OPT="$OPT -DPACKED=\\\"__attribute__ ((packed))\\\""
 %endif
 %ifarch arm
-OPT="$OPT -D__32BIT__ -fsigned-char -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ ((packed))\\\""
-%endif
-%ifarch sparc
-OPT="$OPT -D__32BIT__ -D__BIG_ENDIAN__ -DHAVE_ALLOCA_H -DPACKED=\\\"__attribute__ ((packed))\\\""
+OPT="$OPT -fsigned-char"
 %endif
 # Make the other versions
 %ifarch %{ix86} alpha
-%{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl vga sndserver musserver
+%{__make} fastx11 x11 sdl vga sndserver musserver \
+	CC="%{__cc}" \
+	WANT_OGL=no \
+	COPT.arch="$OPT"
 %else
-%{__make} WANT_OGL=no COPT.arch="$OPT" fastx11 x11 sdl sndserver musserver
+%{__make} fastx11 x11 sdl sndserver musserver \
+	CC="%{__cc}" \
+	WANT_OGL=no \
+	COPT.arch="$OPT"
 %endif
+
 # Make OpenGL version
-rm -f $(grep -l GL_HERETIC $(find . -name \*.c) | sed 's/\.c/.o/g')
-%{__make} WANT_OGL=yes COPT.arch="$OPT -DGLU_VERSION_1_2" glheretic
+rm -f *.o graphics/*.o
+%{__make} -C opengl/sgi-si/libtess sgi-libtess \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}"
+
+%{__make} glheretic \
+	CC="%{__cc}" \
+	WANT_OGL=yes \
+	COPT.arch="$OPT -DGLU_VERSION_1_2"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -207,6 +237,11 @@ rm -rf $RPM_BUILD_ROOT
 %files common
 %defattr(644,root,root,755)
 %doc doc/*
-%{_datadir}/games/%{name}
+%dir %{_datadir}/games/%{name}
+%{_datadir}/games/%{name}/*.raw
 %attr(755,root,root) %{_libdir}/games/%{name}
 %{_pixmapsdir}/*
+
+%files data-shareware
+%defattr(644,root,root,755)
+%{_datadir}/games/%{name}/heretic_share.wad
