@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	svga	# without svgalib version
+#
 Summary:	Heretic for Linux
 Summary(pl):	Heretic dla Linuksa
 Name:		heretic
@@ -19,9 +23,7 @@ URL:		http://heretic.linuxgames.com/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	XFree86-devel
-%ifarch %{ix86} alpha
-BuildRequires:	svgalib-devel
-%endif
+%{?with_svga:BuildRequires:	svgalib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -155,17 +157,10 @@ OPT="$OPT -DPACKED=\\\"__attribute__ ((packed))\\\""
 OPT="$OPT -fsigned-char"
 %endif
 # Make the other versions
-%ifarch %{ix86} alpha
-%{__make} fastx11 x11 sdl vga sndserver musserver \
+%{__make} fastx11 x11 sdl %{?with_svga:vga} sndserver musserver \
 	CC="%{__cc}" \
 	WANT_OGL=no \
 	COPT.arch="$OPT"
-%else
-%{__make} fastx11 x11 sdl sndserver musserver \
-	CC="%{__cc}" \
-	WANT_OGL=no \
-	COPT.arch="$OPT"
-%endif
 
 # Make OpenGL version
 rm -f *.o graphics/*.o
@@ -182,13 +177,8 @@ rm -f *.o graphics/*.o
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}} \
 	$RPM_BUILD_ROOT{%{_libdir}/games/%{name},%{_desktopdir},%{_pixmapsdir}}
-%ifarch %{ix86} alpha
-hvers="xa x sdl vga gl"
-%else
-hvers="xa x sdl gl"
-%endif
 
-for i in $hvers; do
+for i in xa x sdl %{?with_svga:vga} gl; do
 	install ${i}%{name} $RPM_BUILD_ROOT%{_bindir}
 	desktopfile="$RPM_BUILD_ROOT%{_desktopdir}/${i}%{name}.desktop"
 	echo "[Desktop Entry]\nName=Heretic ($i)\nComment=Linux Heretic \
@@ -217,7 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xa%{name}
 %{_desktopdir}/xa%{name}.desktop
 
-%ifarch %{ix86} alpha
+%if %{with svga}
 %files vga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/vga%{name}
