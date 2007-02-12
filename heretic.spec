@@ -3,7 +3,7 @@
 %bcond_without	svga	# without svgalib version
 #
 Summary:	Heretic for Linux
-Summary(pl):	Heretic dla Linuksa
+Summary(pl.UTF-8):   Heretic dla Linuksa
 Name:		heretic
 Version:	1.2
 Release:	1
@@ -29,60 +29,60 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Heretic for Linux.
 
-%description -l pl
+%description -l pl.UTF-8
 Heretic dla Linuksa.
 
 %package x11
 Summary:	Heretic for Linux - X11 version
-Summary(pl):	Heretic dla Linuksa - wersja pod X11
+Summary(pl.UTF-8):   Heretic dla Linuksa - wersja pod X11
 Group:		X11/Applications/Games
 Requires:	%{name}-common = %{version}
 
 %description x11
 Heretic for Linux (X11 version).
 
-%description x11 -l pl
+%description x11 -l pl.UTF-8
 Heretic dla Linuksa (wersja pod X11).
 
 %package fastx11
 Summary:	Heretic for Linux - Accelerated X11 version
-Summary(pl):	Heretic dla Linuksa - przyspieszona wersja pod X11
+Summary(pl.UTF-8):   Heretic dla Linuksa - przyspieszona wersja pod X11
 Group:		X11/Applications/Games
 Requires:	%{name}-common = %{version}
 
 %description fastx11
 Heretic for Linux (accelerated X11 version).
 
-%description fastx11 -l pl
+%description fastx11 -l pl.UTF-8
 Heretic dla Linuksa (przyspieszona wersja pod X11).
 
 %package vga
 Summary:	Heretic for Linux - SVGA version
-Summary(pl):	Heretic dla Linuksa - wersja SVGA
+Summary(pl.UTF-8):   Heretic dla Linuksa - wersja SVGA
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
 %description vga
 Heretic for Linux (svgalib version).
 
-%description vga -l pl
+%description vga -l pl.UTF-8
 Heretic dla Linuksa (wersja svgalib).
 
 %package sdl
 Summary:	Heretic for Linux - SDL version
-Summary(pl):	Heretic dla Linuksa - wersja SDL
+Summary(pl.UTF-8):   Heretic dla Linuksa - wersja SDL
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
 %description sdl
 Heretic for Linux (SDL version).
 
-%description sdl -l pl
+%description sdl -l pl.UTF-8
 Heretic dla Linuksa (wersja SDL).
 
 %package gl
 Summary:	Heretic for Linux - OpenGL version
-Summary(pl):	Heretic dla Linuksa - wersja OpenGL
+Summary(pl.UTF-8):   Heretic dla Linuksa - wersja OpenGL
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 # dlopens libGL.so
@@ -91,12 +91,12 @@ Requires:	OpenGL
 %description gl
 Heretic for Linux (OpenGL version).
 
-%description gl -l pl
+%description gl -l pl.UTF-8
 Heretic dla Linuksa (wersja OpenGL).
 
 %package common
 Summary:	Heretic for Linux - shared files
-Summary(pl):	Heretic dla Linuksa - wspólne pliki
+Summary(pl.UTF-8):   Heretic dla Linuksa - wspÃ³lne pliki
 Group:		Applications/Games
 
 %description common
@@ -108,25 +108,25 @@ the tried and true DOOM gaming environment.
 
 This package contains Heretic common files.
 
-%description common -l pl
-Heretic jest realistyczn± gr± walki w ¶wiecie fantasy. Stworzona
-zosta³a przez grafików Raven Software w porozumieniu z technikami Id
-Software. Heretic daje nowe poziomy gry oraz now± grafikê do
-wypróbowanego ¶rodowiska DOOMa.
+%description common -l pl.UTF-8
+Heretic jest realistycznÄ… grÄ… walki w Å›wiecie fantasy. Stworzona
+zostaÅ‚a przez grafikÃ³w Raven Software w porozumieniu z technikami Id
+Software. Heretic daje nowe poziomy gry oraz nowÄ… grafikÄ™ do
+wyprÃ³bowanego Å›rodowiska DOOMa.
 
-Ten pakiet zawiera wspólne pliki dla wszystkich wersji Heretica pod
+Ten pakiet zawiera wspÃ³lne pliki dla wszystkich wersji Heretica pod
 Linuksa.
 
 %package data-shareware
 Summary:	Heretic for Linux - shareware version of data (WAD file)
-Summary(pl):	Heretic dla Linuksa - wersja shareware danych (pliku WAD)
+Summary(pl.UTF-8):   Heretic dla Linuksa - wersja shareware danych (pliku WAD)
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
 %description data-shareware
 Heretic for Linux - shareware version of data (WAD file).
 
-%description data-shareware -l pl
+%description data-shareware -l pl.UTF-8
 Heretic dla Linuksa - wersja shareware danych (pliku WAD).
 
 %prep
