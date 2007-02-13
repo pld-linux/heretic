@@ -3,7 +3,7 @@
 %bcond_without	svga	# without svgalib version
 #
 Summary:	Heretic for Linux
-Summary(pl.UTF-8):   Heretic dla Linuksa
+Summary(pl.UTF-8):	Heretic dla Linuksa
 Name:		heretic
 Version:	1.2
 Release:	1
@@ -34,7 +34,7 @@ Heretic dla Linuksa.
 
 %package x11
 Summary:	Heretic for Linux - X11 version
-Summary(pl.UTF-8):   Heretic dla Linuksa - wersja pod X11
+Summary(pl.UTF-8):	Heretic dla Linuksa - wersja pod X11
 Group:		X11/Applications/Games
 Requires:	%{name}-common = %{version}
 
@@ -46,7 +46,7 @@ Heretic dla Linuksa (wersja pod X11).
 
 %package fastx11
 Summary:	Heretic for Linux - Accelerated X11 version
-Summary(pl.UTF-8):   Heretic dla Linuksa - przyspieszona wersja pod X11
+Summary(pl.UTF-8):	Heretic dla Linuksa - przyspieszona wersja pod X11
 Group:		X11/Applications/Games
 Requires:	%{name}-common = %{version}
 
@@ -58,7 +58,7 @@ Heretic dla Linuksa (przyspieszona wersja pod X11).
 
 %package vga
 Summary:	Heretic for Linux - SVGA version
-Summary(pl.UTF-8):   Heretic dla Linuksa - wersja SVGA
+Summary(pl.UTF-8):	Heretic dla Linuksa - wersja SVGA
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
@@ -70,7 +70,7 @@ Heretic dla Linuksa (wersja svgalib).
 
 %package sdl
 Summary:	Heretic for Linux - SDL version
-Summary(pl.UTF-8):   Heretic dla Linuksa - wersja SDL
+Summary(pl.UTF-8):	Heretic dla Linuksa - wersja SDL
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
@@ -82,7 +82,7 @@ Heretic dla Linuksa (wersja SDL).
 
 %package gl
 Summary:	Heretic for Linux - OpenGL version
-Summary(pl.UTF-8):   Heretic dla Linuksa - wersja OpenGL
+Summary(pl.UTF-8):	Heretic dla Linuksa - wersja OpenGL
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 # dlopens libGL.so
@@ -96,7 +96,7 @@ Heretic dla Linuksa (wersja OpenGL).
 
 %package common
 Summary:	Heretic for Linux - shared files
-Summary(pl.UTF-8):   Heretic dla Linuksa - wspólne pliki
+Summary(pl.UTF-8):	Heretic dla Linuksa - wspólne pliki
 Group:		Applications/Games
 
 %description common
@@ -119,7 +119,7 @@ Linuksa.
 
 %package data-shareware
 Summary:	Heretic for Linux - shareware version of data (WAD file)
-Summary(pl.UTF-8):   Heretic dla Linuksa - wersja shareware danych (pliku WAD)
+Summary(pl.UTF-8):	Heretic dla Linuksa - wersja shareware danych (pliku WAD)
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}
 
